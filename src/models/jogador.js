@@ -1,12 +1,12 @@
-class Jogador {
-  constructor(nome, ouro) {
-    if (ouro < 0) {
-      throw new Error('Ouro inválido');
-    }
-
-    this.nome = nome;
-    this.ouro = ouro;
+function Jogador(nome, ouro) {
+  if (ouro < 0) {
+    throw new Error('Ouro inválido')
   }
+
+  return {
+    nome,
+    ouro
+  };
 }
 
-module.exports = Jogador;
+module.exports = Jogador
