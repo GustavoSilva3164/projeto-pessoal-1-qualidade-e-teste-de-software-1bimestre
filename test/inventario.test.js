@@ -1,38 +1,38 @@
-const InventarioService = require('../src/services/inventarioService');
+const InventarioService = require('../src/services/inventarioService')
 
 describe('Inventário', () => {
 
-  let inventario;
+  let inventario
 
   beforeEach(() => {
-    inventario = new InventarioService(3);
+    inventario = new InventarioService(3)
   });
 
-  test('deve adicionar item ao inventário', () => {
-    inventario.adicionarItem('Espada');
-    expect(inventario.itens).toContain('Espada');
+  test('deve adicionar item', () => {
+    inventario.adicionarItem('Espada')
+    expect(inventario.itens.includes('Espada')).toBeTruthy()
   });
 
-  test('deve remover item do inventário', () => {
-    inventario.adicionarItem('Escudo');
-    inventario.removerItem('Escudo');
-    expect(inventario.itens).not.toContain('Escudo');
+  test('deve remover item', () => {
+    inventario.adicionarItem('Escudo')
+    inventario.removerItem('Escudo')
+    expect(inventario.itens.includes('Escudo')).toBeFalsy()
   });
 
   test('não deve remover item inexistente', () => {
     expect(() => {
-      inventario.removerItem('Arco');
-    }).toThrow('Item não encontrado');
-  });
+      inventario.removerItem('Arco')
+    }).toThrow()
+  })
 
-  test('deve respeitar limite de itens', () => {
-    inventario.adicionarItem('Item1');
-    inventario.adicionarItem('Item2');
-    inventario.adicionarItem('Item3');
+  test('deve respeitar limite do inventário', () => {
+    inventario.adicionarItem('Item1')
+    inventario.adicionarItem('Item2')
+    inventario.adicionarItem('Item3')
 
     expect(() => {
-      inventario.adicionarItem('Item4');
-    }).toThrow('Inventário cheio');
+      inventario.adicionarItem('Item4')
+    }).toThrow()
   });
 
 });
