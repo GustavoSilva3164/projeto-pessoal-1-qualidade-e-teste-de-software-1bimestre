@@ -1,17 +1,38 @@
-const Jogador = require('../src/models/jogador');
+const InventarioService = require('../src/services/inventarioService');
 
-describe('Jogador', () => {
+describe('Inventário', () => {
 
-  test('deve criar jogador com ouro inicial', () => {
-    const jogador = new Jogador('Gustavo', 100);
-    expect(jogador.nome).toBe('Gustavo');
-    expect(jogador.ouro).toBe(100);
+  let inventario;
+
+  beforeEach(() => {
+    inventario = new InventarioService(3);
   });
 
-  test('não deve permitir ouro negativo', () => {
+  test('deve adicionar item ao inventário', () => {
+    inventario.adicionarItem('Espada');
+    expect(inventario.itens).toContain('Espada');
+  });
+
+  test('deve remover item do inventário', () => {
+    inventario.adicionarItem('Escudo');
+    inventario.removerItem('Escudo');
+    expect(inventario.itens).not.toContain('Escudo');
+  });
+
+  test('não deve remover item inexistente', () => {
     expect(() => {
-      new Jogador('Gustavo', -50);
-    }).toThrow('Ouro inválido');
+      inventario.removerItem('Arco');
+    }).toThrow('Item não encontrado');
+  });
+
+  test('deve respeitar limite de itens', () => {
+    inventario.adicionarItem('Item1');
+    inventario.adicionarItem('Item2');
+    inventario.adicionarItem('Item3');
+
+    expect(() => {
+      inventario.adicionarItem('Item4');
+    }).toThrow('Inventário cheio');
   });
 
 });
