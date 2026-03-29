@@ -1,15 +1,15 @@
-const calcularDesconto = require('../src/utils/desconto');
+const calcularDesconto = require('../src/utils/desconto')
 
 describe('Desconto', () => {
 
-  test('deve aplicar desconto para valores acima de 100', () => {
-    const valorFinal = calcularDesconto(200);
-    expect(valorFinal).toBe(180); // 10% de desconto
+  test('deve aplicar desconto', () => {
+    const valor = calcularDesconto(200)
+    expect(valor).toBe(180)
   });
 
-  test('não deve aplicar desconto para valores baixos', () => {
-    const valorFinal = calcularDesconto(50);
-    expect(valorFinal).toBe(50);
-  });
+  test('não deve aplicar desconto', () => {
+    const valor = calcularDesconto(50)
+    expect(valor).toBe(50)
+  })
 
-});
+})
